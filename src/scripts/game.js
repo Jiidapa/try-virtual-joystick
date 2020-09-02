@@ -1,5 +1,6 @@
 import 'phaser'
 import '@babel/polyfill'
+import VirtualJoystickPlugin from 'phaser3-rex-plugins/plugins/virtualjoystick-plugin.js'
 
 import MainScene from './scenes/mainScene'
 import PreloadScene from './scenes/preloadScene'
@@ -24,6 +25,15 @@ const config = {
       debug: false,
       gravity: { y: 0 }
     }
+  },
+  plugins: {
+    global: [
+      {
+        key: 'VirtualJoystick',
+        plugin: VirtualJoystickPlugin,
+        mapping: 'joystickPlugin'
+      }
+    ]
   }
 }
 
