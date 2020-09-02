@@ -4,8 +4,8 @@ import '@babel/polyfill'
 import MainScene from './scenes/mainScene'
 import PreloadScene from './scenes/preloadScene'
 
-const DEFAULT_WIDTH = 1280
-const DEFAULT_HEIGHT = 720
+const DEFAULT_WIDTH = document.documentElement.clientWidth
+const DEFAULT_HEIGHT = document.documentElement.clientHeight
 
 const config = {
   type: Phaser.AUTO,
@@ -22,7 +22,7 @@ const config = {
     default: 'arcade',
     arcade: {
       debug: false,
-      gravity: { y: 400 }
+      gravity: { y: 0 }
     }
   }
 }
