@@ -18,6 +18,7 @@ export default class MainScene extends Phaser.Scene {
     this.player = this.physics.add.image(width / 2, height / 2, 'player')
     this.setScale(this.player, 1, 0.55)
     this.player.setOrigin(0.5)
+    this.player.setCollideWorldBounds(trues)
   }
 
   renderJoystick() {
