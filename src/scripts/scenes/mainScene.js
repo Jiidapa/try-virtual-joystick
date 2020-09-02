@@ -56,5 +56,13 @@ export default class MainScene extends Phaser.Scene {
     }
   }
 
-  update() {}
+  movingPlayer(delta) {
+    this.player.x += 0.001 * delta * this.joystick.forceX
+    this.player.y += 0.001 * delta * this.joystick.forceY
+    this.player.rotation = this.joystick.rotation
+  }
+
+  update(timestamp, delta) {
+    this.movingPlayer(delta)
+  }
 }
