@@ -37,6 +37,14 @@ export default class MainScene extends Phaser.Scene {
     this.controller = this.physics.add.image(x, y, 'controller')
     this.setScale(this.baseJoystick, 1.25, 0.7)
     this.setScale(this.controller, 1.25, 0.7)
+
+    this.joystick = this.joystickPlugin.add(this, {
+      x: x,
+      y: y,
+      radius: 50,
+      base: this.baseJoystick,
+      thumb: this.controller
+    })
   }
 
   setScale(sprite, tablet, mobile) {
