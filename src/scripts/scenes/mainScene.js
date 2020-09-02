@@ -9,42 +9,44 @@ export default class MainScene extends Phaser.Scene {
   }
 
   create() {
-    /**
-     * Delete all the code below to start a fresh scene
-     */
-    new PhaserLogo(this, this.cameras.main.width / 2, 0)
-    this.fpsText = new FpsText(this)
-
-    // async/await example
-    const pause = ms => {
-      return new Promise(resolve => {
-        window.setTimeout(() => {
-          resolve()
-        }, ms)
-      })
-    }
-    const asyncFunction = async () => {
-      console.log('Before Pause')
-      await pause(4000) // 4 seconds pause
-      console.log('After Pause')
-    }
-    asyncFunction()
-
-    // Spread operator test
-    const numbers = [0, 1, 2, 3]
-    const moreNumbers = [...numbers, 4, 5]
-    console.log(`All numbers: ` + moreNumbers)
-
-    // display the Phaser.VERSION
-    this.add
-      .text(this.cameras.main.width - 15, 15, `Phaser v${Phaser.VERSION}`, {
-        color: '#000000',
-        fontSize: 24
-      })
-      .setOrigin(1, 0)
+    this.renderJoystick()
+    this.renderPlayer()
   }
 
-  update() {
-    this.fpsText.update()
+  renderPlayer() {
+    const { width, height } = this.cameras.main
+    this.player = this.physics.add.image(width / 2, height / 2, 'player')
+    this.setScale(this.player, 1, 0.55)
+    this.player.setOrigin(0.5)
   }
+
+  renderJoystick() {
+    const { width, height } = this.cameras.main
+
+    let x, y
+    if (width > 767) {
+      // tablet and desktop
+      x = width / 7
+      y = height / 1.25
+    } else {
+      // mobile
+      x = width / 6.5
+      y = height / 1.4
+    }
+    this.baseJoystick = this.physics.add.image(x, y, 'base')
+    this.controller = this.physics.add.image(x, y, 'controller')
+    this.setScale(this.baseJoystick, 1.25, 0.7)
+    this.setScale(this.controller, 1.25, 0.7)
+  }
+
+  setScale(sprite, tablet, mobile) {
+    const { width } = this.cameras.main
+    if (width > 767) {
+      sprite.setScale(tablet)
+    } else {
+      sprite.setScale(mobile)
+    }
+  }
+
+  update() {}
 }
